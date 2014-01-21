@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.servlet.ServletConfig;
 import javax.servlet.sip.Proxy;
 import javax.servlet.sip.SipServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -22,6 +23,8 @@ import javax.servlet.sip.SipServletResponse;
  */
 @javax.servlet.sip.annotation.SipServlet
 public class SimpleProxyServlet extends SipServlet {
+
+    private static Logger logger = Logger.getLogger(SimpleProxyServlet.class);
 
     private static final long serialVersionUID = 3978425801979081269L;
 
@@ -34,6 +37,7 @@ public class SimpleProxyServlet extends SipServlet {
         context = config.getServletContext();
 
         System.out.println("Initializing the servlet: SimpleProxyServlet:\n");
+        logger.debug("Initializing the servlet: SimpleProxyServlet:\n");
     }
 
     /*
@@ -42,12 +46,14 @@ public class SimpleProxyServlet extends SipServlet {
     @Override
     protected void doRequest(SipServletRequest request) throws ServletException, IOException {
         System.out.println("SimpleProxyServlet: Get request:\n" + request);
+        logger.debug("SimpleProxyServlet: Get request:\n" + request);
         super.doRequest(request);
     }
 
     @Override
     protected void doResponse(SipServletResponse response) throws ServletException, IOException {
         System.out.println("SimpleProxyServlet: Got response:\n" + response);
+        logger.debug("SimpleProxyServlet: Got response:\n" + response);
         super.doResponse(response);
     }
 
@@ -59,14 +65,17 @@ public class SimpleProxyServlet extends SipServlet {
             proxy.setSupervised(true);
             proxy.proxyTo(request.getRequestURI());
 
+            logger.debug("URI: " + request.getRequestURI());
             System.out.println("URI: " + request.getRequestURI());
         }
 
+        logger.debug("SimpleProxyServlet: Got request:\n" + request);
         System.out.println("SimpleProxyServlet: Got request:\n" + request);
     }
 
     @Override
     protected void doBye(SipServletRequest request) throws ServletException, IOException {
+        logger.debug("SimpleProxyServlet: Got BYE request:\n" + request);
         System.out.println("SimpleProxyServlet: Got BYE request:\n" + request);
         super.doBye(request);
     }

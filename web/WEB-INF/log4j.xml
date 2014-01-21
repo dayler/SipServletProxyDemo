@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- File appender definition -->
+    <appender name="file_txt"
+              class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="File" value="/Users/asalazar/log/Log4JSIPProxyDemo-Log.log"/>
+        <!-- <param name="File" value="Log4JSIPProxyDemo-Log.log"/> -->
+        <param name="append" value="true" />
+        <param name="encoding" value="UTF-8" />
+        <!-- Define rolling policy -->
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <!-- The file to roll to, this is a fairly intelligent parameter, if the file
+ends in .gz, it gzips it, based on the date stamp it rolls at that time,
+default is yyyy-MM-dd, (rolls at midnight)
+See: http://logging.apache.org/log4j/companions/extras/apidocs/org/apache/log4j/rolling/TimeBasedRollingPolicy.html -->
+            <param name="FileNamePattern" value="log/Log4JDemo-Log.%d.log.gz" />
+        </rollingPolicy>
+        <!-- Define layout -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The log message pattern -->
+            <param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+        </layout>
+        <!-- <layout class="org.apache.log4j.SimpleLayout"/> -->
+    </appender>
+    <appender name="console_app" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The log message pattern -->
+            <param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] %c - %m%n" />
+        </layout>
+    </appender>
+    <root>
+        <priority value="trace" />
+        <appender-ref ref="file_txt"/>
+        <appender-ref ref="console_app"/>
+    </root>
+</log4j:configuration>
