@@ -9,7 +9,6 @@ package com.dayler.sip.servlet.example;
 
 import javax.servlet.sip.ServletTimer;
 import javax.servlet.sip.SipServlet;
-import javax.servlet.ServletContext;
 import javax.servlet.sip.SipServletRequest;
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -20,7 +19,6 @@ import javax.servlet.sip.SipServletResponse;
 import javax.servlet.sip.SipSession;
 import javax.servlet.sip.TimerListener;
 import javax.servlet.sip.TimerService;
-import javax.ws.rs.core.Context;
 import org.apache.log4j.Logger;
 
 /**
